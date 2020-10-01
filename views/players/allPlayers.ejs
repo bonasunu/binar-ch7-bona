@@ -1,0 +1,49 @@
+<html>
+  <head>
+    <%- include('../head.ejs') %>
+    <title>Players | All</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h3>All Players</h3>
+      <div class="alert alert-info" role="alert">
+        <p>
+          <strong>READ</strong> operation - Table <samp>user_game</samp> joining
+          <samp>user_game_biodata</samp> and <samp>user_game_history</samp>.
+          <br />
+          Click detail to make <strong>UPDATE</strong> and
+          <strong>DELETE</strong> operation
+        </p>
+      </div>
+      <a href="/create-player">
+        <button class="btn btn-primary">Create New Player</button>
+      </a>
+      <table class="table mt-5">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% players.forEach(i => { %>
+          <tr>
+            <td><%= i.username %></td>
+            <td><%= i.PlayerBio.first_name %></td>
+            <td><%= i.PlayerBio.last_name %></td>
+            <td><%= i.email %></td>
+            <td>
+              <a href="/players/<%= i.id %>">
+                <button class="btn btn-outline-info">Detail</button>
+              </a>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

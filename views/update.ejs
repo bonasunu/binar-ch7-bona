@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./head.ejs') %>
+    <title>Update Player</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h3>Update Player</h3>
+      <a href="/players/<%= player.id %>">Back to Player Detail</a>
+      <div class="row">
+        <div class="col-7">
+          <p>Edit on the form field to update.</p>
+          <form
+            method="POST"
+            action="/players/update/<%= player.id %>"
+            class="mt-5"
+            name="updateForm"
+          >
+            <div class="form-group">
+              <label for="exampleInputUsername1"
+                >Username
+                <input
+                  type="button"
+                  value="Clear"
+                  class="btn btn-light"
+                  onclick="document.getElementById('exampleInputUsername1').value = ''"
+                />
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputUsername1"
+                name="username"
+                value="<%= player.username %>"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1"
+                >Email
+                <input
+                  type="button"
+                  value="Clear"
+                  class="btn btn-light"
+                  onclick="document.getElementById('exampleInputEmail1').value = ''"
+                />
+              </label>
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                name="email"
+                value="<%= player.email %>"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputUsername1"
+                >First Name
+                <input
+                  type="button"
+                  value="Clear"
+                  class="btn btn-light"
+                  onclick="document.getElementById('exampleInputFirstName1').value = ''"
+                />
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputFirstName1"
+                name="first_name"
+                value="<%= player.PlayerBio.first_name %>"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputLastName1"
+                >Last Name
+                <input
+                  type="button"
+                  value="Clear"
+                  class="btn btn-light"
+                  onclick="document.getElementById('exampleInputLastName1').value = ''"
+                />
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputLastName1"
+                name="last_name"
+                value="<%= player.PlayerBio.last_name %>"
+              />
+            </div>
+            <div class="form-group">
+              <label for="exampleInputCity1"
+                >City
+                <input
+                  type="button"
+                  value="Clear"
+                  class="btn btn-light"
+                  onclick="document.getElementById('exampleInputCity1').value = ''"
+                />
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputCity1"
+                name="city"
+                value="<%= player.PlayerBio.city %>"
+              />
+            </div>
+            <button type="submit" class="btn btn-outline-info">Submit</button>
+            <input
+              type="button"
+              value="CLear All"
+              class="btn btn-outline-info"
+              onclick="
+              document.getElementById('exampleInputCity1').value = '';
+              document.getElementById('exampleInputLastName1').value = '';
+              document.getElementById('exampleInputFirstName1').value = '';
+              document.getElementById('exampleInputUsername1').value = '';
+              document.getElementById('exampleInputEmail1').value = '';
+              "
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
