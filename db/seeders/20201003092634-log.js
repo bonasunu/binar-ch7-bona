@@ -16,7 +16,6 @@ module.exports = {
           session: [
             '06896bd4-8cbc-48c6-8c46-9364a6d939c4',
             '7bbe267d-e1aa-41d5-9a48-50e74fc04400',
-            '7bbe267d-e1aa-41d5-9a48-50e74fc04400',
           ],
           playing_date: new Date(),
         },
