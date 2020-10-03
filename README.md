@@ -1,11 +1,11 @@
 # Challenge Chapter 6 Submission
 
-Binar Academy Bootcamp Chapter 6 Submission by Bonaventura Sunu
+Binar Academy Bootcamp Chapter 7 Submission by Bonaventura Sunu
 
 ## Demo
 
 Link for demo
-https://binar-ch6-bona.herokuapp.com/
+https://binar-ch7-bona.herokuapp.com/
 
 ## Description
 
@@ -49,8 +49,8 @@ Info
 **Step 1. Clone the code into a fresh folder.**
 
 ```
-$ git clone git@github.com:bonasunu/binar-ch6-bona.git
-$ cd binar-ch6-bona
+$ git clone git@github.com:bonasunu/binar-ch7-bona.git
+$ cd binar-ch7-bona
 ```
 
 **Step 2. Install Dependencies.**
