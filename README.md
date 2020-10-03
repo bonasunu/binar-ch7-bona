@@ -1,4 +1,4 @@
-# Challenge Chapter 6 Submission
+# Challenge Chapter 7 Submission
 
 Binar Academy Bootcamp Chapter 7 Submission by Bonaventura Sunu
 
