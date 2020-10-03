@@ -1,4 +1,3 @@
-const { v4: uuidv4 } = require('uuid')
 const db = require('../db/models')
 
 const getAllPlayers = async (req, res) => {

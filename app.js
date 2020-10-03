@@ -1,12 +1,14 @@
 const express = require('express')
 const app = express()
 const apiPlayersRoute = require('./routes/apiPlayers')
+const authRoute = require('./routes/auth')
 const middleware = require('./utils/middleware')
 
 app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/api', apiPlayersRoute)
+app.use('/', authRoute)
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 
