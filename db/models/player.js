@@ -1,15 +1,18 @@
+'use strict'
+const { Model } = require('sequelize')
 module.exports = (sequelize, DataTypes) => {
-  const Player = sequelize.define(
-    'Player',
+  class Player extends Model {
+    static associate(models) {
+      this.hasMany(models.Room, {
+        foreignKey: 'creator',
+      })
+    }
+  }
+  Player.init(
     {
-      id: {
-        type: DataTypes.UUID,
-        primaryKey: true,
-        allowNull: false,
-        defaultValue: DataTypes.UUIDV1,
-      },
-      username: { type: DataTypes.STRING, allowNull: false, unique: true },
-      email: { type: DataTypes.STRING, allowNull: false },
+      username: DataTypes.STRING,
+      password: DataTypes.STRING,
+      role: DataTypes.STRING,
     },
     {
       sequelize,
@@ -17,20 +20,6 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'user_game',
     }
   )
-  Player.associate = (models) => {
-    Player.hasOne(models.PlayerBio, {
-      foreignKey: {
-        name: 'uid',
-        allowNull: false,
-      },
-    })
 
-    Player.hasMany(models.PlayerHistory, {
-      foreignKey: {
-        name: 'user_id',
-        allowNull: false,
-      },
-    })
-  }
   return Player
 }

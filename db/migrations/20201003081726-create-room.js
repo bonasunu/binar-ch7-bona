@@ -1,30 +1,31 @@
 'use strict'
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('user_game', {
+    await queryInterface.createTable('rooms', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      username: {
-        type: Sequelize.STRING,
-        unique: true,
+      creator: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: 'user_game',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
       },
-      email: {
-        type: Sequelize.STRING,
+      members: {
+        type: Sequelize.ARRAY(Sequelize.STRING),
       },
       createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
       },
     })
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('user_game')
+    await queryInterface.dropTable('rooms')
   },
 }
