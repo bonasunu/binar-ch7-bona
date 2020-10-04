@@ -18,11 +18,16 @@ const login = async (req, res) => {
 }
 
 const register = async (req, res) => {
-  await Player.registerUser({
-    id: uuidv4(),
-    username: req.body.username,
-    password: req.body.password,
-  })
+  try {
+    await Player.registerUser({
+      id: uuidv4(),
+      username: req.body.username,
+      password: req.body.password,
+    })
+  } catch (error) {
+    console.log(error)
+  }
+
   res.json({ info: 'Register success!' })
 }
 

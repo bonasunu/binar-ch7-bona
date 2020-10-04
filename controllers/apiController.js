@@ -1,4 +1,5 @@
 const db = require('../db/models')
+const { v4: uuidv4 } = require('uuid')
 
 const getAllPlayers = async (req, res) => {
   const players = await db.Player.findAll({
@@ -14,7 +15,16 @@ const getAllRooms = async (req, res) => {
   res.json({ rooms })
 }
 
+const createRoom = async (req, res) => {
+  const room = await db.Room.create({
+    id: uuidv4(),
+    creator: req.user.id,
+  })
+  res.json({ room: room.id })
+}
+
 module.exports = {
   getAllPlayers,
   getAllRooms,
+  createRoom,
 }
