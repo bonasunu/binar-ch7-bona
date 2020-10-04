@@ -9,7 +9,7 @@ https://binar-ch7-bona.herokuapp.com/
 
 ## Description
 
-This is CRUD app using NodeJS, ExpressJS, Sequelize, PostgreSQL, and EJS. There are 4 tables on the database after installation: `user_game`, `user_game_biodata`, `user_game_history`, `SequelizeMeta` (stores postgres setting).
+This is CRUD app using NodeJS, ExpressJS, Sequelize, PostgreSQL, and EJS. There are 4 tables on the database after installation: `user_game`, `rooms`, `logs`, `SequelizeMeta` (stores postgres setting).
 
 API routes:
 
