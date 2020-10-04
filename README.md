@@ -11,27 +11,15 @@ https://binar-ch7-bona.herokuapp.com/
 
 This is CRUD app using NodeJS, ExpressJS, Sequelize, PostgreSQL, and EJS. There are 4 tables on the database after installation: `user_game`, `user_game_biodata`, `user_game_history`, `SequelizeMeta` (stores postgres setting).
 
-Routes:
+API routes:
 
 ```
-/ """Login page"""
-/players
-/players/:id
-/create-player """Create player Form"""
-/players/create
-/players/delete/:id
-/players/update-player/:id """Update player Form"""
-/players/update/:id
-```
-
-RESTful API:
-
-```
-GET - /players
-GET - /players/:id
-POST - /players/create
-DELETE - /players/delete/:id
-PUT - /players/update/:id
+POST - /login
+POST - /register
+GET - /whoami
+GET - /api/players
+POST - /api/create-room
+GET - /api/rooms
 ```
 
 Info
