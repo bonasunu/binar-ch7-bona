@@ -9,6 +9,9 @@ const format = (user) => {
     accessToken: user.generateToken(),
   }
 }
+
+const homepage = async (req, res) => res.json({ info: 'Homepage' })
+
 const login = async (req, res) => {
   const player = await Player.authenticateUser(req.body)
   res.json(format(player))
@@ -24,6 +27,7 @@ const register = async (req, res) => {
 }
 
 module.exports = {
+  homepage,
   login,
   register,
 }

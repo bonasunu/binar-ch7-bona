@@ -1,7 +1,5 @@
 const db = require('../db/models')
 
-const homepage = async (req, res) => res.json({ info: 'Homepage' })
-
 const getAllPlayers = async (req, res) => {
   const players = await db.Player.findAll({
     include: [db.Room],
@@ -17,7 +15,6 @@ const getAllRooms = async (req, res) => {
 }
 
 module.exports = {
-  homepage,
   getAllPlayers,
   getAllRooms,
 }
