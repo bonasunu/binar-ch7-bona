@@ -26,8 +26,11 @@ const register = async (req, res) => {
   res.json({ info: 'Register success!' })
 }
 
+const whoAmI = async (req, res) => await res.json(req.user)
+
 module.exports = {
   homepage,
   login,
   register,
+  whoAmI,
 }
