@@ -19,6 +19,7 @@ const createRoom = async (req, res) => {
   const room = await db.Room.create({
     id: uuidv4(),
     creator: req.user.id,
+    name: req.body.name,
   })
   res.json({ room: room.id })
 }

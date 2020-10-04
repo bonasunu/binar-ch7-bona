@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Room.init(
     {
+      name: DataTypes.STRING,
       creator: DataTypes.UUID,
       members: DataTypes.ARRAY(DataTypes.STRING),
     },
