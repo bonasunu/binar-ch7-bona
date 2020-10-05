@@ -4,7 +4,7 @@ const controller = require('../controllers/apiController')
 const restrict = require('../utils/restrict')
 
 router.get('/players', restrict, controller.getAllPlayers)
-router.get('/rooms', controller.getAllRooms)
+router.get('/rooms', restrict, controller.getAllRooms)
 router.post('/create-room', restrict, controller.createRoom)
 
 module.exports = router

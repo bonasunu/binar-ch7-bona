@@ -11,6 +11,13 @@ module.exports = {
           password:
             '$2y$10$SlaxDjpvwTm3CRc.s99wm.fcQ81T5z0FhxkYy8zz7RBKQFF845tbO',
         },
+        {
+          id: '17709b9e-0f7d-4064-9a18-71e6a541812f',
+          username: 'superadmin',
+          password:
+            '$2b$10$BETvvrOkA3JPrOFFYBdfxuur0I.P7dxdsqiAyk2YVZv1l4NumLjAa',
+          role: 'admin',
+        },
       ],
       {}
     )

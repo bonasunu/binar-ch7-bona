@@ -3,8 +3,10 @@ const { v4: uuidv4 } = require('uuid')
 const ac = require('../lib/roles')
 
 const getAllPlayers = async (req, res) => {
+  console.log(req.user)
   const permission = ac.can(req.user.role).readAny('players')
   if (!permission.granted) throw new Error('NoPermission')
+
   const players = await db.Player.findAll({
     include: [db.Room],
   })
@@ -12,6 +14,9 @@ const getAllPlayers = async (req, res) => {
 }
 
 const getAllRooms = async (req, res) => {
+  const permission = ac.can(req.user.role).readAny('rooms')
+  if (!permission.granted) throw new Error('NoPermission')
+
   const rooms = await db.Room.findAll({
     include: [db.Log],
   })
