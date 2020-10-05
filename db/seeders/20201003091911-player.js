@@ -10,6 +10,7 @@ module.exports = {
           username: 'harrypotter',
           password:
             '$2y$10$SlaxDjpvwTm3CRc.s99wm.fcQ81T5z0FhxkYy8zz7RBKQFF845tbO',
+          role: 'player',
         },
         {
           id: '17709b9e-0f7d-4064-9a18-71e6a541812f',
