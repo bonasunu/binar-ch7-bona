@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       const payload = {
         id: this.id,
         username: this.username,
+        role: this.role,
       }
 
       return jwt.sign(payload, process.env.SECRET)

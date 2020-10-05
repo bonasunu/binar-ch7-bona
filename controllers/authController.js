@@ -2,10 +2,11 @@ const { Player } = require('../db/models')
 const { v4: uuidv4 } = require('uuid')
 
 const format = (user) => {
-  const { id, username } = user
+  const { id, username, role } = user
   return {
     id,
     username,
+    role,
     accessToken: user.generateToken(),
   }
 }
