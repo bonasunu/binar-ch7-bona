@@ -8,6 +8,9 @@ const getAllPlayers = async (req, res) => {
 
   const players = await db.Player.findAll({
     include: [db.Room],
+    where: {
+      role: 'player',
+    },
   })
   res.json({ players })
 }
