@@ -1,6 +1,16 @@
 const db = require('../db/models')
 const ac = require('../lib/roles')
 
+const format = (user) => {
+  const { id, username, role } = user
+  return {
+    id,
+    username,
+    role,
+    accessToken: user.generateToken(),
+  }
+}
+
 const getAllPlayers = async (req, res) => {
   const permission = await ac.can(req.user.role).readAny('players')
   if (!permission.granted) throw new Error('NoPermission')
@@ -17,14 +27,13 @@ const getAllPlayers = async (req, res) => {
 const adminLogin = async (req, res) => res.render('adminLogin')
 
 const authenticateAdmin = async (req, res) => {
-  await db.Player.authenticateUser(req.body)
-  res.redirect('hello')
+  const user = await db.Player.authenticateUser(req.body)
+  const activeUser = format(user)
+  res.render('hello', { user: activeUser })
 }
 
-const hello = async (req, res) => res.render('hello')
 module.exports = {
   getAllPlayers,
   adminLogin,
   authenticateAdmin,
-  hello,
 }
