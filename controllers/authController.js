@@ -31,7 +31,20 @@ const register = async (req, res) => {
 
 const whoAmI = async (req, res) => await res.json(req.user)
 
+const userLoginForm = async (req, res) => res.render('login')
+
+const userRegisterPage = async (req, res) => res.render('register')
+
+const authenticateAdmin = async (req, res) => {
+  const user = await db.Player.authenticateUser(req.body)
+  const activeUser = format(user)
+  res.render('hello', { user: activeUser })
+}
+
 module.exports = {
+  userLoginForm,
+  userRegisterPage,
+  authenticateAdmin,
   homepage,
   login,
   register,
