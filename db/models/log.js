@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       room_id: DataTypes.UUID,
       winner: DataTypes.ARRAY(DataTypes.STRING),
       session: DataTypes.ARRAY(DataTypes.STRING),
+      is_active: DataTypes.BOOLEAN,
       playing_date: DataTypes.DATE,
     },
     {

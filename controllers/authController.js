@@ -26,7 +26,7 @@ const register = async (req, res) => {
     password,
   })
 
-  res.json({ info: 'Register success!' })
+  res.status(201).json({ info: 'Register success!' })
 }
 
 const whoAmI = async (req, res) => await res.json(req.user)

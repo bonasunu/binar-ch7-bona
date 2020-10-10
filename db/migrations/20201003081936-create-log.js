@@ -23,6 +23,10 @@ module.exports = {
         type: Sequelize.ARRAY(Sequelize.STRING),
         allowNull: false,
       },
+      is_active: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+      },
       playing_date: {
         type: Sequelize.DATE,
         allowNull: false,

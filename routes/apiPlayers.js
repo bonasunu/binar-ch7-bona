@@ -6,5 +6,6 @@ const restrict = require('../utils/restrict')
 router.get('/players', restrict, controller.getAllPlayers)
 router.get('/rooms', restrict, controller.getAllRooms)
 router.post('/create-room', restrict, controller.createRoom)
+router.post('/fight/:room', restrict, controller.fightRoom)
 
 module.exports = router
