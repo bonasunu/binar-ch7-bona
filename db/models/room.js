@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       this.belongsTo(models.Player, {
         foreignKey: 'creator',
       })
-      this.hasMany(models.Log, {
+      this.hasOne(models.Log, {
         foreignKey: 'room_id',
       })
     }

@@ -1,6 +1,7 @@
 const db = require('../db/models')
 const { v4: uuidv4 } = require('uuid')
 const ac = require('../lib/roles')
+const cache = require('memory-cache')
 
 const getAllPlayers = async (req, res) => {
   const permission = await ac.can(req.user.role).readAny('players')
@@ -45,19 +46,14 @@ const fightRoom = async (req, res) => {
       .status(404)
       .json({ info: "Room doesn't exist. Please create new room first." })
 
-  let activeLog = room['Logs'].filter((i) => i.is_active === true)
+  let activeLog = await db.Log.findOne({
+    where: {
+      room_id: room_id,
+    },
+  })
 
-  // TODO Create helper to deactivate session
-
-  // check if room exist, then check active log
-  //find a log, if log doesn't exist, then create it
-  // if log, check empty session. if full, choose another room
-  // find open session
-  // play with 2 players
-  // set is_active false if error happen
-
-  if (room && activeLog.length === 0) {
-    const newLog = await db.Log.create({
+  if (room && !activeLog) {
+    await db.Log.create({
       log_id: uuidv4(),
       room_id: room_id,
       winner: [],
@@ -65,20 +61,14 @@ const fightRoom = async (req, res) => {
       is_active: true,
       playing_date: new Date(),
     })
-    activeLog.concat(newLog)
+    cache.put(req.params.room, [])
     res.json({ info: 'You joined this room' })
-  } else if (room && activeLog[0].session.length < 2) {
-    // add player
-    // if duplicate player, return error
-    // if full, return error
-    // else, success
-    const duplicateUser = await activeLog[0].session.some(
-      (i) => i === req.user.id
-    )
+  } else if (room && activeLog.session.length < 2) {
+    const duplicateUser = await activeLog.session.some((i) => i === req.user.id)
     if (duplicateUser)
       res.status(202).json({ info: 'You are in the room right now.' })
     else if (!duplicateUser) {
-      const session = activeLog[0].session.concat(req.user.id)
+      const session = activeLog.session.concat(req.user.id)
 
       await db.Log.update(
         {
@@ -86,18 +76,15 @@ const fightRoom = async (req, res) => {
         },
         {
           where: {
-            log_id: activeLog[0].log_id,
+            log_id: activeLog.log_id,
           },
         }
       )
 
-      activeLog[0].session = session
       res.json({ info: 'You joined this room' })
     }
-  } else if (room && activeLog[0].session.length === 2) {
-    const duplicateUser = await activeLog[0].session.some(
-      (i) => i === req.user.id
-    )
+  } else if (room && activeLog.session.length === 2) {
+    const duplicateUser = await activeLog.session.some((i) => i === req.user.id)
     if (duplicateUser)
       res.status(202).json({ info: 'You are in the room right now.' })
     else
@@ -110,30 +97,37 @@ const fightRoom = async (req, res) => {
     })
 }
 
-//let gaming = {} // temporary storage
-
 const playGame = async (req, res) => {
-  // TODO
-  // create route for player selection
-  // wait reponse for all players, if all players respond then go to next round, else session ended
-  // show the result of each round
-  // show the winner
-  // finish
-  // const log = await db.Log.findOne({
-  //   where: {
-  //     room_id: req.params.room,
-  //     is_active: true,
-  //     //session: [req.user.id]
-  //   }
-  // })
-  // const
-  // let gaming = {}
-  // set gaming variable to empty again after result is shown
-  // USE MEMORY CACHE
+  const log = await db.Log.findOne({
+    where: {
+      room_id: req.params.room,
+      is_active: true,
+    },
+  })
+
+  const player = log.session.includes(req.user.id)
+  if (!player)
+    throw new Error(
+      'You are not registered to this room. Please join another room.'
+    )
+
+  let game = cache.get(req.params.room)
+  if (game.length < 2) {
+    const player = req.user.id
+    game.push({
+      player: player,
+      option: req.body.option,
+    })
+    cache.put(req.params.room, game)
+  }
+
+  res.json(game)
 }
 
 const showResult = async (res, req) => {
-  // showResult
+  // get cache
+  // compare the inputs
+  // showResult (each round and the winner)
 }
 
 module.exports = {
