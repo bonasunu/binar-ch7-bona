@@ -9,7 +9,7 @@ https://binar-ch7-bona.herokuapp.com/
 
 ## Description
 
-This is CRUD app using NodeJS, ExpressJS, Sequelize, PostgreSQL, and EJS. There are 4 tables on the database after installation: `user_game`, `rooms`, `logs`, `SequelizeMeta` (stores postgres setting).
+This is CRUD app using NodeJS, ExpressJS, Sequelize, PostgreSQL, and EJS. There are 4 tables on the database after installation: `user_game`, `rooms`, `logs`, `SequelizeMeta` (store for postgres setting).
 
 Routes:
 
@@ -37,6 +37,7 @@ Info
 
 - memory-cache helps to store temporary data on server
 - accessControl module is middleware for role-based access
+- `/utils/restrict.js` is passport jwt strategy implementation
 - `/db/migrations` contains sequelize migration files
 - `db/seeders` contains sequelize seeders
 - `db/models` contains sequelize models for tables inside database
