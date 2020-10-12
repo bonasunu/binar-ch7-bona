@@ -97,6 +97,7 @@ const fightRoom = async (req, res) => {
     })
 }
 
+// Extra Feature
 const playGame = async (req, res) => {
   const log = await db.Log.findOne({
     where: {
@@ -124,10 +125,50 @@ const playGame = async (req, res) => {
   res.json(game)
 }
 
+// Extra feature
 const showResult = async (res, req) => {
-  // get cache
+  // get cache with params room
   // compare the inputs
+  // empty cache
   // showResult (each round and the winner)
+  const choice = ['paper', 'rock', 'scissors']
+  const WIN_TABLE = [
+    ['d', 'p1', 'p2'],
+    ['p2', 'd', 'p1'],
+    ['p1', 'p2', 'd'],
+  ]
+
+  const game = cache.get(req.params.room)
+  const player1Choice = choice.indexOf(game[0].option.toLowerCase())
+  const player2Choice = choice.indexOf(game[1].option.toLowerCase())
+  const result = WIN_TABLE[player1Choice][player2Choice]
+  const player1 = Object.keys(game[0])[0]
+  const player2 = Object.keys(game[1])[0]
+  let roundWinner
+
+  switch (result) {
+    case 'd':
+      roundWinner = 'draw'
+    case 'p1':
+      roundWinner = player1
+    case 'p2':
+      roundWinner = player2
+  }
+
+  let gameResult = await db.Log.findOne({
+    where: {
+      room_id: req.params.room,
+    },
+  })
+
+  gameResult.winner.push(roundWinner)
+
+  await db.Log.update({
+    winner: gameResult.winner,
+  })
+
+  // show winner
+  res.json({ winner: gameResult.winner })
 }
 
 module.exports = {
